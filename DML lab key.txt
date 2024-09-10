@@ -1,0 +1,36 @@
+2.1
+SELECT fname,lname,address
+FROM employee,department
+WHERE dname='Administration'and dno=dnumber;
+
+2.2
+SELECT Pnumber,Dnum,lname,address,bdate
+FROM Employee, department,project
+WHERE Plocation='Stafford' and Dnum=Dnumber and Mgr_ssn=ssn;
+
+2.3
+SELECT DISTINCT fname, lname, salary
+FROM department, project, works_on, employee
+WHERE dname='Research' and dnumber=dnum and pno=pnumber and essn=ssn; 
+
+2.4
+--find the ssn who works on project controled by department 1 (comment)
+CREATE TABLE temp AS 
+SELECT essn
+FROM works_on, project
+WHERE dnum=1 and pnumber=pno;
+
+SELECT ssn FROM employee
+MINUS
+SELECT essn FROM temp;
+
+2.5
+--find the number of locations that each department has
+CREATE TABLE temp AS 
+SELECT Dnumber, count(*) num_locations
+FROM Dept_locations
+GROUP BY Dnumber;
+
+SELECT dname, fname, lname
+FROM temp NATURAL JOIN department, employee
+WHERE num_locations>1 and Mgr_ssn=ssn;
