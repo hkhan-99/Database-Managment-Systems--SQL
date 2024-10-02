@@ -1,2 +1,2 @@
 # Database-Managment-Systems--SQL
-Working with mySQL in Oracle Database
+Working with mySQL and Oracle Database
